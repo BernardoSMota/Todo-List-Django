@@ -1,0 +1,18 @@
+<div class="todo-item {% if task.completed %} completed {% endif %}">
+    <div class="description">
+        <p class="todo_title micro-margin-bot"> {{task.title}} </p>
+        <p class="todo_created smlst-fs micro-margin-top">{{ task.created_at }} 
+            {% if task.completed  %}<span class="todo_completed smlst-fs">| Completed at 3:43PM, 07/10/24</span>{% endif %}
+        </p>
+    </div>
+    <div class="action-buttons center">
+        {% if task.completed %}
+            <a href="{% url "todo:changeCompleteStatus" task.id %}"><i class="fa-solid fa-square-check fa-xl"></i></a>
+        {% else %}
+            <a href="{% url "todo:changeCompleteStatus" task.id %}"><i class="fa-regular fa-square fa-xl"></i></a>
+        {% endif %}
+        
+        <a href="#"><i class="fa-solid fa-pen"></i></a>
+        <a href="{% url "todo:delete" task.id %}"><i class="fa-solid fa-trash"></i></a>
+    </div>
+</div>

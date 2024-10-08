@@ -1,0 +1,40 @@
+{% include "todolist/partials/_head.html" %}
+</head>
+<body>
+    <header class="center">
+        <h1>Todo List</h1>
+    </header>
+
+    <div class="separator"></div>
+
+    <main class="max-width">
+        <div class="container max-width">
+            <div class="filters">
+                <a id='new-task' href="#">Add task</a>
+                <div class="filters-list">
+                    <a {% if not filter %} class='selected' {% endif %} href="{% url "todo:index" %}">All</a>
+                    <a {% if filter == 'completed' %} class='selected' {% endif %} href="{% url "todo:completed" %}">Completed</a>
+                    <a {% if filter == 'pending' %} class='selected' {% endif %} href="{% url "todo:pending" %}">Pending</a>
+                </div>
+            </div>
+
+            <div class="main-content micro-mt">
+                {% if tasks %}
+                    <div class="todo-items">
+                        {% for task in tasks  %}
+                            {% include "todolist/partials/_todoitem.html" %}
+                        {% endfor %}
+                    </div>
+                
+                {% else %}
+                    <h3 class='center nothingFound'>Nada encontrado. Clique <a class='link-hint' href="{% url "todo:index" %}">aqui</a> para voltar para o início</h3>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="separator base-mt"></div>
+        <p class="center">ベランド</p>
+    </footer>
+</body>
+</html>
