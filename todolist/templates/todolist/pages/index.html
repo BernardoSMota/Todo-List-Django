@@ -1,16 +1,14 @@
 {% include "todolist/partials/_head.html" %}
 </head>
 <body>
-    <header class="center">
-        <h1>Todo List</h1>
-    </header>
+    {% include "todolist/partials/_header.html" %}
 
     <div class="separator"></div>
 
     <main class="max-width">
         <div class="container max-width">
             <div class="filters">
-                <a id='new-task' href="#">Add task</a>
+                <a id='new-task' href="{% url "todo:create" %}">Add task</a>
                 <div class="filters-list">
                     <a {% if not filter %} class='selected' {% endif %} href="{% url "todo:index" %}">All</a>
                     <a {% if filter == 'completed' %} class='selected' {% endif %} href="{% url "todo:completed" %}">Completed</a>
@@ -36,5 +34,11 @@
         <div class="separator base-mt"></div>
         <p class="center">ベランド</p>
     </footer>
+
+    {% include "todolist/partials/_modal.html" %}
+
+    <script>
+        
+    </script>
 </body>
 </html>
