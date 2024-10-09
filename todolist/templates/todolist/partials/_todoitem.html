@@ -13,7 +13,8 @@
         {% endif %}
         
         <a href="{% url "todo:edit" task.id %}"><i class="fa-solid fa-pen"></i></a>
-        <a ref="{% url "todo:delete" task.id %}"><i class="fa-solid fa-trash"></i></a>
+        <a onclick=openModal({{task.id}})><i class="fa-solid fa-trash"></i></a>
     </div>
-</div>
+
+</div>    
 

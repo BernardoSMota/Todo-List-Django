@@ -13,20 +13,23 @@
                 <div class="form-group">
                     <div class="form-input">
                         <label for="task_title">Title</label>
-                        <input type="text" name='task_title' maxlength='50' value='{{ title }}' required>
+                        <input type="text" name='task_title' id='task_title' maxlength='45' value='{{ title }}' required>
                     </div>
                     <div class="form-buttons">
                         <a class="form-button cancel-button"  href="{% url "todo:index" %}">Cancel</a>
-                        {% comment %} <button class="form-button confirm-button" type="submit">Cancel</button> {% endcomment %}
                         <button class="form-button confirm-button" type="submit">Confirm</button>
                     </div>
                 </div>
             </form>
         </div>
     </main>
-    <footer>
-        <div class="separator base-mt"></div>
-        <p class="center">ベランド</p>
-    </footer>
+
+    {% include "todolist/partials/_footer.html" %}
+
+    <script>
+        window.onload = function() {
+            document.getElementById('task_title').focus();
+        }
+    </script>
 </body>
 </html>

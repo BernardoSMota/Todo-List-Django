@@ -82,7 +82,7 @@ def editTask(request, id):
 def delete(request, id):
     task = get_object_or_404(Task, id=id)
     task.delete()
-    
+
     previous_url = request.META.get('HTTP_REFERER', 'todo:index')
     return redirect(previous_url)
 

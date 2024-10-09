@@ -24,21 +24,45 @@
                         {% endfor %}
                     </div>
                 
+                {% elif not tasks and not filter %}
+                    <h3 class='center nothingFound'>Nada encontrado. Clique <a class='link-hint' href="{% url "todo:create" %}">aqui</a> para criar sua primeira task</h3>
                 {% else %}
-                    <h3 class='center nothingFound'>Nada encontrado. Clique <a class='link-hint' href="{% url "todo:index" %}">aqui</a> para voltar para o início</h3>
+                    <h3 class='center nothingFound'>Nada encontrado. Clique <a class='link-hint' href="{% url "todo:index" %}">aqui</a> para voltar ao início</h3>
                 {% endif %}
             </div>
         </div>
     </main>
-    <footer>
-        <div class="separator base-mt"></div>
-        <p class="center">ベランド</p>
-    </footer>
+
+    {% include "todolist/partials/_footer.html" %}
 
     {% include "todolist/partials/_modal.html" %}
 
     <script>
-        
+        var modal = document.getElementById('modal');
+        var span = document.getElementsByClassName("close")[0];
+        var deleteLink = document.getElementById('deleteLink'); // Novo
+        var cancelButton = document.getElementById('cancelButton')
+            
+        function openModal(id){
+            deleteLink.href = `{% url 'todo:delete' 9999999999 %}`
+            deleteLink.href = deleteLink.href.replace('9999999999', id)
+            modal.style.display = "grid";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        cancelButton.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        } 
     </script>
 </body>
 </html>
+
