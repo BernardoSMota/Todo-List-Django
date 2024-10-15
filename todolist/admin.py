@@ -11,4 +11,4 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = 'id', 'title',
     list_per_page = 10
     ordering = '-id',
-    readonly_fields = 'created_at', 'completed_at'
+    readonly_fields = 'created_at', 'completed_at', 'owner'

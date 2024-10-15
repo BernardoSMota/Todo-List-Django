@@ -4,48 +4,65 @@ from datetime import datetime
 from django.urls import reverse
 
 def index(request):
-    tasks = Task.objects.all().order_by('-id', )
-    context = tasks
-    return render(request=request, 
-                  template_name='todolist/pages/index.html',
-                  context={
-                      'tasks':context,
-                      }
-                  )
+    user = request.user
+    context = {
+        'user': user
+    }
 
+    if user.is_authenticated:
+        tasks = Task.objects.filter(owner=user).order_by('-id', )
+        context['tasks'] = tasks
+
+            
+    return render(request=request, 
+                template_name='todolist/pages/index.html',
+                context=context
+                )
+    
     
 def completed(request):
-    tasks = Task.objects.filter(completed=True).order_by('-id')
-    context = tasks
+    user = request.user
+    context = {
+        'user': user,
+        'filter': 'completed',
+    }
+    
+    if user.is_authenticated:    
+        tasks = Task.objects.filter(completed=True, owner=user).order_by('-id')
+        context['tasks'] = tasks
+        
     return render(request=request, 
                   template_name='todolist/pages/index.html',
-                  context={
-                      'tasks':context,
-                      'filter': 'completed'
-                      }
+                  context=context
                   )
 
     
 def pending(request):    
-    tasks = Task.objects.filter(completed=False).order_by('-id')
-    context = tasks
+    user = request.user
+    context = {
+        'user': user,
+        'filter': 'pending'
+    }
+    if user.is_authenticated:   
+        tasks = Task.objects.filter(completed=False, owner=user).order_by('-id')
+        context['tasks'] = tasks
+        
+        
     return render(request=request, 
                   template_name='todolist/pages/index.html',
-                  context={
-                      'tasks':context,
-                      'filter': 'pending'
-                      }
-                  )
+                  context=context
+                )
     
 
 def createTask(request):
     form_action = reverse('todo:create')
+    user = request.user
     
-    if request.method == 'POST':
+    if user.is_authenticated  and request.method == 'POST':
         task_title = request.POST.get('task_title')
         
         if task_title:
-            new_task = Task(title=task_title)
+            new_task = Task(title=task_title, owner=user)
             new_task.save()
         
             return redirect('todo:index')
@@ -54,6 +71,7 @@ def createTask(request):
         'action': 'Create',
         'form-action': form_action
     }
+    
     return render(request=request, template_name='todolist/pages/new_task.html', context=context)
 
 

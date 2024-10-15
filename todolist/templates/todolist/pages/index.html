@@ -4,7 +4,7 @@
     {% include "todolist/partials/_header.html" %}
 
     <div class="separator"></div>
-
+    {% if user.is_authenticated %}
     <main class="max-width">
         <div class="container max-width">
             <div class="filters">
@@ -63,6 +63,9 @@
             }
         } 
     </script>
+    {% else %}
+        <h3 class='center nothingFound'>Faça login para poder visualizar suas tasks</h3>
+    {% endif %}
 </body>
 </html>
 
