@@ -1,0 +1,7 @@
+<div class="container max-width user-info">
+    {% if user.is_authenticated %}
+        <p class='user'><span class='strong'>{{user}}</span> | <a class='link-hint' href="{% url "todoUser:logout" %}">Fazer Logout</a> </p>
+    {% else %}
+        <p class='user'><a class='link-hint' href="{% url "todoUser:login" %}">Fazer Login</a> </p>
+    {% endif %}
+ </div>

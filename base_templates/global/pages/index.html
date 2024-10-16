@@ -1,12 +1,16 @@
-{% include "todolist/partials/_head.html" %}
+{% include "global/partials/_head.html" %}
 </head>
 <body>
-    {% include "todolist/partials/_header.html" %}
+    {% include "global/partials/_header.html" %}
 
+    {% include "global/partials/_user.html" %}
     <div class="separator"></div>
     {% if user.is_authenticated %}
     <main class="max-width">
         <div class="container max-width">
+            
+            {% include "global/partials/_messages.html" %}
+
             <div class="filters">
                 <a id='new-task' href="{% url "todo:create" %}">Add task</a>
                 <div class="filters-list">
@@ -20,7 +24,7 @@
                 {% if tasks %}
                     <div class="todo-items">
                         {% for task in tasks  %}
-                            {% include "todolist/partials/_todoitem.html" %}
+                            {% include "global/partials/_todoitem.html" %}
                         {% endfor %}
                     </div>
                 
@@ -33,9 +37,9 @@
         </div>
     </main>
 
-    {% include "todolist/partials/_footer.html" %}
+    {% include "global/partials/_footer.html" %}
 
-    {% include "todolist/partials/_modal.html" %}
+    {% include "global/partials/_modal.html" %}
 
     <script>
         var modal = document.getElementById('modal');
@@ -64,8 +68,11 @@
         } 
     </script>
     {% else %}
-        <h3 class='center nothingFound'>Faça login para poder visualizar suas tasks</h3>
+        <h3 class='center nothingFound'><a class='link-hint' href="{% url "todoUser:login" %}">Faça login</a> para poder visualizar suas tasks</h3>
     {% endif %}
+
+    {% include "global/partials/_script.html" %}
+    
 </body>
 </html>
 

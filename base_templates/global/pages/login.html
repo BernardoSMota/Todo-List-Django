@@ -1,0 +1,76 @@
+{% include "global/partials/_head.html" %}
+</head>
+<body>
+    {% include "global/partials/_header.html" %}
+
+    <div class="separator"></div>
+
+    <main class="max-width">
+
+        <div class="container max-width form-container">
+
+            {% include "global/partials/_messages.html" %}
+
+            {% if not user.is_authenticated %}
+                <h4>{{ action }}</h4>
+
+                <form action="{{ form_action }}" method='POST'>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+
+                        {% for field in form  %}
+                            <div class="form-input">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {{ field.errors }}
+                            </div>
+
+                            {% if field.help_text %}
+                                <span class="help-text">
+                                    {{ field.help_text }}
+                                </span>
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="form-buttons">
+                            <a class="form-button cancel-button"  href="{% url "todo:index" %}">{{ buttons.0 }}</a>
+                            <button class="form-button confirm-button" type="submit"> {{ buttons.1 }} </button>
+                        </div>
+
+                    </div>
+                </form>
+
+                {% if action == 'Login' %}
+                    <p class="center">Não tem uma conta? Clique <a class='link-hint' href="{% url "todoUser:create" %}">aqui</a> para criar</p>
+
+                {% else %}
+                    <p class="center">Já tem uma conta? Clique <a class='link-hint' href="{% url "todoUser:login" %}">aqui</a> para fazer login</p>
+                {% endif %}
+
+
+            {% else %}
+                <p>Você fez login como <span class='strong'>{{user}}</span>. Clique <a class='link' href="{% url "todoUser:logout" %}">aqui</a> para sair.</p>
+
+                <div class="form-buttons">
+                    <a class="form-button cancel-button"  href="{% url "todo:index" %}">{{ buttons.0 }}</a>
+                    <button class="form-button confirm-button" type="submit"> {{ buttons.1 }} </button>
+                </div>
+
+            {% endif %}
+        </div>
+            
+    </main>
+
+    {% include "global/partials/_footer.html" %}
+
+    <script>
+        window.onload = function() {
+            document.getElementById('task_title').focus();
+        }
+    </script>
+
+    {% include "global/partials/_script.html" %}
+    
+</body>
+</html>

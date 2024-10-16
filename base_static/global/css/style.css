@@ -306,7 +306,8 @@ h3.nothingFound{
 .form-group{
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: center;
+    justify-content: center;
 }
 
 .form-input{
@@ -340,7 +341,7 @@ h3.nothingFound{
 
 
 
-.form-group .form-button{
+.form-button{
     height: 3rem;
     width: 10rem;
 
@@ -366,15 +367,16 @@ h3.nothingFound{
     background-color: hsl(var(--clr-primary-dkst));
 }
 
-.form-group .cancel-button{
+a.cancel-button{
     background-color: tomato;
+    color: white;
 }
 
-.form-group .cancel-button:hover{
+a.cancel-button:hover{
     background-color: hsl(9, 100%, 30%)
 }
 
-.form-group .form-button:active{
+.form-button:active{
     transform: translate(3px, 2px);
 }
 
@@ -411,7 +413,7 @@ h3.nothingFound{
     flex-direction: column;
 }
 
-.close {
+.close, .close-message {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -420,7 +422,7 @@ h3.nothingFound{
     align-self: flex-end;
 }
 
-.close:hover, .close:focus {
+.close:hover, .close:focus, .close-message:hover, .close-message:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -465,3 +467,72 @@ h3.nothingFound{
 .title{
     text-align: center;
 }
+
+.help-text{
+    font-size: 1rem;
+    margin: 0 0 1rem 0.5rem;
+    text-align: left;
+    align-self: flex-start;
+}
+
+.help-text ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.errorlist{
+    margin: 0 0 0 0.5rem;
+    padding: 0;
+    list-style-type: none;
+    font-size: 1rem;
+    text-align: left;
+    align-self: flex-start;
+    color: tomato;
+}
+
+.strong{
+    font-weight: bolder;
+}
+
+a.under{
+    text-decoration: underline;
+}
+
+.message {
+    display: block;
+    position: relative;
+    max-width: 600px;
+    padding: calc(var(--spacing-smlst)/2);
+    margin: 0 auto;
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+    border-radius: var(--br-base);
+    font-size: var(--fs-smlr);
+  }
+  
+  .message.success {
+    background: rgba(0, 255, 0, 0.3);
+    border: 1px solid rgba(0, 255, 0, 90%);
+  }
+  
+  .message.error {
+    background: rgba(255, 0, 0, 0.3);
+    border: 1px solid rgba(255, 0, 0, 90%);
+  }
+  
+  .message.warning {
+    background: rgba(255, 255, 0, 0.3);
+    border: 1px solid rgba(255, 255, 0, 90%);
+  }
+
+  .user-info p.user{
+    margin: 0
+  }
+
+  .x-button{
+    position:absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+  }

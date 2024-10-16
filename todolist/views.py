@@ -15,7 +15,7 @@ def index(request):
 
             
     return render(request=request, 
-                template_name='todolist/pages/index.html',
+                template_name='global/pages/index.html',
                 context=context
                 )
     
@@ -32,7 +32,7 @@ def completed(request):
         context['tasks'] = tasks
         
     return render(request=request, 
-                  template_name='todolist/pages/index.html',
+                  template_name='global/pages/index.html',
                   context=context
                   )
 
@@ -49,7 +49,7 @@ def pending(request):
         
         
     return render(request=request, 
-                  template_name='todolist/pages/index.html',
+                  template_name='global/pages/index.html',
                   context=context
                 )
     
@@ -72,7 +72,7 @@ def createTask(request):
         'form-action': form_action
     }
     
-    return render(request=request, template_name='todolist/pages/new_task.html', context=context)
+    return render(request=request, template_name='global/pages/new_task.html', context=context)
 
 
 def editTask(request, id):
@@ -94,7 +94,7 @@ def editTask(request, id):
         
         return redirect('todo:index')
     
-    return render(request=request, template_name='todolist/pages/new_task.html', context=context)
+    return render(request=request, template_name='global/pages/new_task.html', context=context)
 
 
 def delete(request, id):
